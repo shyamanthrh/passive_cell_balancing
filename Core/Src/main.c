@@ -94,9 +94,12 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   uint8_t continueonfault[6]={0x91,0x00,0x13,0x08,0x20,0x0A};
-	uint8_t balanceon[7]={0x92,0x00,0x14,0xFF,0xFF,0xF8,0x69};
+	uint8_t balanceon[7]={0x92,0x00,0x14,0x00,0x01,0x38,0x19};
 	uint8_t balanceoff[7]={0x92,0x00,0x14,0x00,0x00,0xF9,0xD9};
 	uint8_t poweroff[6]={0x91,0x00,0x0C,0x40,0x28,0x0C};
+	
+	uint8_t getaddr[7] = {0x89,0x00,0x00,0x0A,0x00,0xDB,0x7F};
+	uint8_t recvBuf[4] ={0x11,0x11,0x11,0x11};
 	
 	HAL_Delay(2000);
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_RESET);
@@ -113,13 +116,17 @@ int main(void)
 	
 	HAL_Delay(7000);
 	
-	HAL_UART_Transmit(&huart1,continueonfault,6,2);
-	HAL_Delay(1000);
-	HAL_UART_Transmit(&huart1,balanceon,7,2);
-	HAL_Delay(5000);
-	HAL_UART_Transmit(&huart1,balanceoff,7,2);
-	HAL_Delay(5000);
-	HAL_UART_Transmit(&huart1,poweroff,6,2);
+//	HAL_UART_Transmit(&huart1,continueonfault,6,2);
+//	HAL_Delay(1000);
+//	HAL_UART_Transmit(&huart1,balanceon,7,2);
+//	HAL_Delay(5000);
+//	HAL_UART_Transmit(&huart1,balanceoff,7,2);
+//	HAL_Delay(5000);
+//	HAL_UART_Transmit(&huart1,poweroff,6,2);
+//	
+	  HAL_UART_Transmit(&huart1,getaddr,7,2);
+	  HAL_UART_Receive_IT(&huart1,recvBuf,4);
+	  
 	
 	
   /* USER CODE END 2 */
@@ -129,8 +136,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);
-	HAL_Delay(1000);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
