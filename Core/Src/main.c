@@ -2,7 +2,7 @@
 /**
   ******************************************************************************
   * @title          : Passive Cell Balancing
-	  @file           : main.c
+	* @file           : main.c
   * @brief          : Main program body
 	* @author         : Amrathesh and Shyamanth RH
 	* @date						: 13/12/2020
