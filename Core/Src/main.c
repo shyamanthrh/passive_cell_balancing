@@ -1,7 +1,8 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
+  * @title          : Passive Cell Balancing
+	  @file           : main.c
   * @brief          : Main program body
 	* @author         : Amrathesh and Shyamanth RH
 	* @date						: 13/12/2020
@@ -124,6 +125,7 @@ int main(void)
 //	HAL_Delay(5000);
 //	HAL_UART_Transmit(&huart1,poweroff,6,2);
 //	
+	/*polling was recving only a byte so we moved to interrupt */
 	  HAL_UART_Transmit(&huart1,getaddr,7,2);
 	  HAL_UART_Receive_IT(&huart1,recvBuf,4);
 	  
