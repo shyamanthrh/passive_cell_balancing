@@ -1,6 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
+	* @title          : Passive Cell Balancing- Branch1
   * @file           : main.c
   * @brief          : Main program body
 	* @author         : Amrathesh and Shyamanth RH
