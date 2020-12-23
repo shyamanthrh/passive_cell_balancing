@@ -1,6 +1,9 @@
 --cpu Cortex-M3
 "callbalancing\startup_stm32f103xb.o"
+"callbalancing\pl455.o"
 "callbalancing\main.o"
+"callbalancing\gpio.o"
+"callbalancing\usart.o"
 "callbalancing\stm32f1xx_it.o"
 "callbalancing\stm32f1xx_hal_msp.o"
 "callbalancing\stm32f1xx_hal_gpio_ex.o"

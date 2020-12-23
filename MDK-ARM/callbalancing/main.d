@@ -26,3 +26,6 @@ callbalancing\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 callbalancing\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 callbalancing\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 callbalancing\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+callbalancing\main.o: ../Core/Inc/usart.h
+callbalancing\main.o: ../Core/Inc/gpio.h
+callbalancing\main.o: ../Core/Inc/pl455.h

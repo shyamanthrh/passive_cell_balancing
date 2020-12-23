@@ -7,23 +7,27 @@ HeaderPath=..\Drivers\STM32F1xx_HAL_Driver\Inc;..\Drivers\STM32F1xx_HAL_Driver\I
 CDefines=USE_HAL_DRIVER;STM32F103xB;USE_HAL_DRIVER;USE_HAL_DRIVER;
 
 [PreviousUsedKeilFiles]
-SourceFiles=..\Core\Src\main.c;..\Core\Src\stm32f1xx_it.c;..\Core\Src\stm32f1xx_hal_msp.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c;..\Core\Src/system_stm32f1xx.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c;..\Core\Src/system_stm32f1xx.c;..\Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c;;
+SourceFiles=..\Core\Src\main.c;..\Core\Src\gpio.c;..\Core\Src\usart.c;..\Core\Src\stm32f1xx_it.c;..\Core\Src\stm32f1xx_hal_msp.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c;..\Core\Src/system_stm32f1xx.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c;..\Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c;..\Core\Src/system_stm32f1xx.c;..\Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c;;
 HeaderPath=..\Drivers\STM32F1xx_HAL_Driver\Inc;..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy;..\Drivers\CMSIS\Device\ST\STM32F1xx\Include;..\Drivers\CMSIS\Include;..\Core\Inc;
 CDefines=USE_HAL_DRIVER;STM32F103xB;USE_HAL_DRIVER;USE_HAL_DRIVER;
 
 [PreviousGenFiles]
 AdvancedFolderStructure=true
-HeaderFileListSize=3
-HeaderFiles#0=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/stm32f1xx_it.h
-HeaderFiles#1=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/stm32f1xx_hal_conf.h
-HeaderFiles#2=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/main.h
+HeaderFileListSize=5
+HeaderFiles#0=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/gpio.h
+HeaderFiles#1=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/usart.h
+HeaderFiles#2=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/stm32f1xx_it.h
+HeaderFiles#3=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/stm32f1xx_hal_conf.h
+HeaderFiles#4=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc/main.h
 HeaderFolderListSize=1
 HeaderPath#0=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Inc
 HeaderFiles=;
-SourceFileListSize=3
-SourceFiles#0=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/stm32f1xx_it.c
-SourceFiles#1=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/stm32f1xx_hal_msp.c
-SourceFiles#2=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/main.c
+SourceFileListSize=5
+SourceFiles#0=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/gpio.c
+SourceFiles#1=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/usart.c
+SourceFiles#2=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/stm32f1xx_it.c
+SourceFiles#3=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/stm32f1xx_hal_msp.c
+SourceFiles#4=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src/main.c
 SourceFolderListSize=1
 SourcePath#0=C:/Users/Shyamanth R H/Documents/Integrated Projects/callbalancing/Core/Src
 SourceFiles=;

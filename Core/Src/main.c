@@ -24,9 +24,13 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "usart.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "pl455.h"
+
 
 /* USER CODE END Includes */
 
@@ -37,6 +41,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define NOC 6 //Number of cells
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,7 +50,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 
@@ -53,8 +57,6 @@ UART_HandleTypeDef huart1;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -94,49 +96,105 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  uint8_t continueonfault[6]={0x91,0x00,0x13,0x08,0x20,0x0A};
-	uint8_t balanceon[7]={0x92,0x00,0x14,0x00,0x01,0x38,0x19};
-	uint8_t balanceoff[7]={0x92,0x00,0x14,0x00,0x00,0xF9,0xD9};
-	uint8_t poweroff[6]={0x91,0x00,0x0C,0x40,0x28,0x0C};
+
 	
-	uint8_t getaddr[7] = {0x89,0x00,0x00,0x0A,0x00,0xDB,0x7F};
-	uint8_t recvBuf[4] ={0x11,0x11,0x11,0x11};
+	BYTE bFrame[132];
 	
-	HAL_Delay(2000);
-	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_RESET);
-	HAL_Delay(2000);
-	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_SET); // Wakeup 
+  float volt[6];
+	volatile int minimum = 0;
+	volatile uint16_t balanceenable = 0x0000;
+	powerDown();
+	WakePL455();
 	
-	GPIO_InitTypeDef GPIO_InitStruct = {0}; // This structure is redifined to reconfigure PB15 to Open Drain mode from Push pull.
-	 /*Configure GPIO pin : PB15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_15;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD; // Set as Open-Drain
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 	
-	HAL_Delay(7000);
+  WriteReg(0, 107, 0x8000, 2, FRMWRT_SGL_NR); // Mask Customer Checksum Fault bit
+
+  // Clear all faults
+  WriteReg(0, 82, 0xFFC0, 2, FRMWRT_SGL_NR);  // clear all fault summary flags
+  WriteReg(0, 81, 0x38, 1, FRMWRT_SGL_NR);    // clear fault flags in the system status register //comm clear and reset
+
+  //Using Default addr i.e 0
+
+  delayms(10);
+
+	// Configure AFE to fastest setting
+	WriteReg(0, 61, 0x00, 1, FRMWRT_ALL_NR); // set 0 initial delay
 	
-//	HAL_UART_Transmit(&huart1,continueonfault,6,2);
-//	HAL_Delay(1000);
-//	HAL_UART_Transmit(&huart1,balanceon,7,2);
-//	HAL_Delay(5000);
-//	HAL_UART_Transmit(&huart1,balanceoff,7,2);
-//	HAL_Delay(5000);
-//	HAL_UART_Transmit(&huart1,poweroff,6,2);
-//	
-	/*polling was recving only a byte so we moved to interrupt */
-	  HAL_UART_Transmit(&huart1,getaddr,7,2);
-	  HAL_UART_Receive_IT(&huart1,recvBuf,4);
-	  
+	// Configure cell voltage and internal temp sample period
+	WriteReg(0, 62, 0x04, 1, FRMWRT_ALL_NR); // set 4.13us cell and 12.6us temp ADC sample period
 	
+	// Configure the oversampling rate
+	WriteReg(0, 7, 0x00, 1, FRMWRT_ALL_NR); // set 0 oversampling means no oversampling
+	
+
+  WriteReg(0, 81, 0x38, 1, FRMWRT_SGL_NR); // clear fault flags in the system status register
+  WriteReg(0, 82, 0xFFC0, 2, FRMWRT_SGL_NR); // clear all fault summary flags
+
+  // Select number of cells and channels to sample
+  WriteReg(0, 13, 0x06, 1, FRMWRT_SGL_NR); // set number of cells to 6
+		
+  WriteReg(0, 3, 0x003F0000, 4, FRMWRT_SGL_NR); // select 7 cell
+		
+ 
+		
+  // Set cell over-voltage and cell under-voltage thresholds on a single board (section 2.2.6.1)
+  WriteReg(0, 144, 0xD70A, 2, FRMWRT_SGL_NR); // set OV threshold = 4.2000V
+  WriteReg(0, 142, 0x8CCD, 2, FRMWRT_SGL_NR); // set UV threshold = 2.75000V
+
+   
+
+
+	
+	HAL_Delay(1000);
+	
+	//powerDown();
 	
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {
+  { 
+		HAL_Delay(5000);
+		WriteReg(0, 2, 0x01, 1, FRMWRT_SGL_R); // send sync sample command
+		ReadResp(bFrame,15); //pkt header + 6 cell voltages + CRC
+		
+		HAL_Delay(1000);
+		
+		getcellVoltages(bFrame,NOC,volt);
+		
+		minimum = findminimum(volt,NOC);
+		
+		switch(minimum)
+		{
+			case 1:
+				balanceenable=0x0001;
+			  break;
+			case 2:
+				balanceenable=0x0002;
+			  break;
+			case 3:
+				balanceenable=0x0004;
+			  break;
+			case 4:
+				balanceenable=0x0008;
+			  break;
+			case 5:
+				balanceenable=0x0010;
+			  break;
+			case 6:
+				balanceenable=0x0020;
+			  break;
+			default:
+				balanceenable=0x0000;
+			
+		}
+			
+	//	HAL_Delay(2000);
+		
+	  WriteReg(0,19,8,1,FRMWRT_SGL_NR); // Continue balance on fault
+		WriteReg(0,20,balanceenable,2,FRMWRT_SGL_NR); // balance on for the cell with minimum voltage
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -177,75 +235,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-}
-
-/**
-  * @brief USART1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USART1_UART_Init(void)
-{
-
-  /* USER CODE BEGIN USART1_Init 0 */
-
-  /* USER CODE END USART1_Init 0 */
-
-  /* USER CODE BEGIN USART1_Init 1 */
-
-  /* USER CODE END USART1_Init 1 */
-  huart1.Instance = USART1;
-  huart1.Init.BaudRate = 250000;
-  huart1.Init.WordLength = UART_WORDLENGTH_8B;
-  huart1.Init.StopBits = UART_STOPBITS_1;
-  huart1.Init.Parity = UART_PARITY_NONE;
-  huart1.Init.Mode = UART_MODE_TX_RX;
-  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USART1_Init 2 */
-
-  /* USER CODE END USART1_Init 2 */
-
-}
-
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_15, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : PC13 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PB15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_15;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
 }
 
 /* USER CODE BEGIN 4 */
