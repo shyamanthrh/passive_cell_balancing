@@ -1,0 +1,4 @@
+Have to append Package.tex file
+Replace Main.tex file
+Replace ecproject.sty file
+Replace Image file

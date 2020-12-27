@@ -1,0 +1,50 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{Razavi2000}{book}{}
+      \name{author}{1}{}{%
+        {{hash=c7a8cbdc611fb566c84f257674d0a44f}{%
+           family={Razavi},
+           familyi={R\bibinitperiod},
+           given={Behzad},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill Education}%
+      }
+      \strng{namehash}{c7a8cbdc611fb566c84f257674d0a44f}
+      \strng{fullhash}{c7a8cbdc611fb566c84f257674d0a44f}
+      \strng{bibnamehash}{c7a8cbdc611fb566c84f257674d0a44f}
+      \strng{authorbibnamehash}{c7a8cbdc611fb566c84f257674d0a44f}
+      \strng{authornamehash}{c7a8cbdc611fb566c84f257674d0a44f}
+      \strng{authorfullhash}{c7a8cbdc611fb566c84f257674d0a44f}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0072380323}
+      \field{title}{Design of Analog CMOS Integrated Circuits}
+      \field{year}{2000}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

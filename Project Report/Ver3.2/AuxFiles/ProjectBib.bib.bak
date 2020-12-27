@@ -1,0 +1,29 @@
+% Encoding: UTF-8
+
+@Book{Razavi2000,
+  author    = {Behzad Razavi},
+  title     = {Design of Analog CMOS Integrated Circuits},
+  year      = {2000},
+  publisher = {McGraw-Hill Education},
+  isbn      = {978-0072380323},
+}
+
+@WWW{Hugo,
+  author = {Hugo},
+  title  = {Quantization Noise and Signal-Noise Ratio (SNR)},
+  url    = {http://www.onmyphd.com/?p=quantization.noise.snr},
+}
+
+@Book{Baker2010,
+  author    = {Baker, R. Jacob},
+  title     = {CMOS},
+  year      = {2010},
+  date      = {2010-10-01},
+  publisher = {Wiley John + Sons},
+  isbn      = {0470881321},
+  pagetotal = {1072},
+  url       = {https://www.ebook.de/de/product/11404837/r_jacob_baker_cmos.html},
+  ean       = {9780470881323},
+}
+
+@Comment{jabref-meta: databaseType:biblatex;}
