@@ -42,6 +42,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define NOC 6 //Number of cells
+#define MASK (~(0xFFFF << NOC)) //mask off unused cells
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -100,9 +101,12 @@ int main(void)
 	
   BYTE bFrame[132];
 	
-  float volt[6];
-  volatile int minimum = 0;
-  volatile uint16_t balanceenable = 0x0000;
+  float volt[NOC];
+	float maxCellVoltage = 0; 
+	float minCellVoltage = 0;
+  volatile int minCellIdx = 0;
+	volatile int maxCellIdx = 0;
+  volatile uint16_t balance_en = 0x0000;
   
   powerDown();
   WakePL455();
@@ -135,16 +139,10 @@ int main(void)
   WriteReg(0, 13, 0x06, 1, FRMWRT_SGL_NR); // set number of cells to 6
 		
   WriteReg(0, 3, 0x003F0000, 4, FRMWRT_SGL_NR); // select 7 cell
-		
- 
-		
+			
   // Set cell over-voltage and cell under-voltage thresholds on a single board 
   WriteReg(0, 144, 0xD70A, 2, FRMWRT_SGL_NR); // set OV threshold = 4.2000V
   WriteReg(0, 142, 0x8CCD, 2, FRMWRT_SGL_NR); // set UV threshold = 2.75000V
-
-   
-
-
 	
   HAL_Delay(1000);
 	
@@ -154,8 +152,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  { 
+  while (1){ 
+		
 		HAL_Delay(5000);
 		WriteReg(0, 2, 0x01, 1, FRMWRT_SGL_R); // send sync sample command
 		ReadResp(bFrame,15); //pkt header + 6 cell voltages + CRC
@@ -164,34 +162,21 @@ int main(void)
 		
 		getcellVoltages(bFrame,NOC,volt);
 		
-		minimum = findminimum(volt,NOC);
+		minCellIdx = findminimum(volt,NOC);
+		maxCellIdx = findmaximum(volt,NOC);
 		
-		switch(minimum) {
-			case 1:
-				balanceenable=0x0001;
-			        break;
-			case 2:
-				balanceenable=0x0002;
-			        break;
-			case 3:
-				balanceenable=0x0004;
-			        break;
-			case 4:
-				balanceenable=0x0008;
-			        break;
-			case 5:
-				balanceenable=0x0010;
-			        break;
-			case 6:
-				balanceenable=0x0020;
-			        break;
-			default:
-				balanceenable=0x0000;
-			}
+		minCellVoltage = volt[minCellIdx - 1];
+		maxCellVoltage = volt[maxCellIdx - 1];
+		
+		
+	  if(maxCellVoltage - minCellVoltage > 0.01)
+			balance_en =  MASK & ~(1<<minCellIdx);
+	  else
+			balance_en = 0x0000;
 			
 
- WriteReg(0,19,8,1,FRMWRT_SGL_NR); // Continue balance on fault
- WriteReg(0,20,balanceenable,2,FRMWRT_SGL_NR); // balance on for the cell with minimum voltage
+    WriteReg(0,19,8,1,FRMWRT_SGL_NR); // Continue balance on fault
+    WriteReg(0,20,balance_en,2,FRMWRT_SGL_NR); // balance on for the cell with minimum voltage
 		
     /* USER CODE END WHILE */
 

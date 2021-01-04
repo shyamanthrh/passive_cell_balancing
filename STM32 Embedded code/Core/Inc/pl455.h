@@ -42,7 +42,7 @@ int  WriteReg(BYTE bID, uint16_t wAddr, uint64_t dwData, BYTE bLen, BYTE bWriteT
 int  WriteFrame(BYTE bID, uint16_t wAddr, BYTE * pData, BYTE bLen, BYTE bWriteType);
 void getcellVoltages(uint8_t *data,uint8_t NOC,float *volt);
 int findminimum(float *data,uint8_t NOC);
-
+int findmaximum(float *data,uint8_t NOC);
 int ReadResp(BYTE * pData, uint16_t bLen);
 
 void delayms(uint16_t ms);

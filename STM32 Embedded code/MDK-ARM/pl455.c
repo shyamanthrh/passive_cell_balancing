@@ -178,19 +178,32 @@ void getcellVoltages(uint8_t *data,uint8_t NOC,float *volt)
 
 int findminimum(float data[],uint8_t NOC)
 {
-	float min = -1;
+	float min = data[0];
 	int index = 1;
-	for(int i=0;i<NOC;i++)
-	{ 
-		float x = data[i];
-		if(x<min)
-		{
+	for(int i=0;i<NOC;i++){ 
+		
+		if(data[i]<min){
 			min=data[i];
 		  index = i;
 		}
 	}
 	return index+1;
 }
+
+int findmaximum(float *data,uint8_t NOC)
+{
+	float max = data[0];
+	int index = 1;
+	for(int i=0;i<NOC;i++){ 
+		
+		if(data[i]>max){
+			max = data[i];
+		  index = i;
+		}
+	}
+	return index+1;
+}
+
 // CRC16 for PL455
 // ITU_T polynomial: x^16 + x^15 + x^2 + 1
 const uint16_t crc16_table[256] = {
