@@ -2,12 +2,12 @@
 /**
   ******************************************************************************
   * @title          : Passive Cell Balancing
-	* @file           : main.c
+  * @file           : main.c
   * @brief          : Main program body
-	* @author         : Amrathesh and Shyamanth RH
-	* @date						: 13/12/2020
-	* @description    : This code communicates with bq76pl55a IC. This was the day we had a major breakthrough in our project on cell balancing 
-	* 									We could finnaly communicate with bq76pl55a battery monitoring IC
+  * @author         : Amrathesh and Shyamanth RH
+  * @date           : 13/12/2020
+  * @description    : This code communicates with bq76pl55a IC. This was the day we had a major breakthrough in our project on cell balancing 
+  * 		      We could finally communicate with bq76pl55a battery monitoring IC
   ******************************************************************************
   * @attention
   *
@@ -98,13 +98,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 	
-	BYTE bFrame[132];
+  BYTE bFrame[132];
 	
   float volt[6];
-	volatile int minimum = 0;
-	volatile uint16_t balanceenable = 0x0000;
-	powerDown();
-	WakePL455();
+  volatile int minimum = 0;
+  volatile uint16_t balanceenable = 0x0000;
+  
+  powerDown();
+  WakePL455();
 	
 	
   WriteReg(0, 107, 0x8000, 2, FRMWRT_SGL_NR); // Mask Customer Checksum Fault bit
@@ -117,14 +118,14 @@ int main(void)
 
   delayms(10);
 
-	// Configure AFE to fastest setting
-	WriteReg(0, 61, 0x00, 1, FRMWRT_ALL_NR); // set 0 initial delay
+  // Configure AFE to fastest setting
+  WriteReg(0, 61, 0x00, 1, FRMWRT_ALL_NR); // set 0 initial delay
 	
-	// Configure cell voltage and internal temp sample period
-	WriteReg(0, 62, 0x04, 1, FRMWRT_ALL_NR); // set 4.13us cell and 12.6us temp ADC sample period
+  // Configure cell voltage and internal temp sample period
+  WriteReg(0, 62, 0x04, 1, FRMWRT_ALL_NR); // set 4.13us cell and 12.6us temp ADC sample period
 	
-	// Configure the oversampling rate
-	WriteReg(0, 7, 0x00, 1, FRMWRT_ALL_NR); // set 0 oversampling means no oversampling
+  // Configure the oversampling rate
+  WriteReg(0, 7, 0x00, 1, FRMWRT_ALL_NR); // set 0 oversampling means no oversampling
 	
 
   WriteReg(0, 81, 0x38, 1, FRMWRT_SGL_NR); // clear fault flags in the system status register
@@ -137,7 +138,7 @@ int main(void)
 		
  
 		
-  // Set cell over-voltage and cell under-voltage thresholds on a single board (section 2.2.6.1)
+  // Set cell over-voltage and cell under-voltage thresholds on a single board 
   WriteReg(0, 144, 0xD70A, 2, FRMWRT_SGL_NR); // set OV threshold = 4.2000V
   WriteReg(0, 142, 0x8CCD, 2, FRMWRT_SGL_NR); // set UV threshold = 2.75000V
 
@@ -145,9 +146,9 @@ int main(void)
 
 
 	
-	HAL_Delay(1000);
+  HAL_Delay(1000);
 	
-	//powerDown();
+	
 	
   /* USER CODE END 2 */
 
@@ -165,35 +166,32 @@ int main(void)
 		
 		minimum = findminimum(volt,NOC);
 		
-		switch(minimum)
-		{
+		switch(minimum) {
 			case 1:
 				balanceenable=0x0001;
-			  break;
+			        break;
 			case 2:
 				balanceenable=0x0002;
-			  break;
+			        break;
 			case 3:
 				balanceenable=0x0004;
-			  break;
+			        break;
 			case 4:
 				balanceenable=0x0008;
-			  break;
+			        break;
 			case 5:
 				balanceenable=0x0010;
-			  break;
+			        break;
 			case 6:
 				balanceenable=0x0020;
-			  break;
+			        break;
 			default:
 				balanceenable=0x0000;
+			}
 			
-		}
-			
-	//	HAL_Delay(2000);
-		
-	  WriteReg(0,19,8,1,FRMWRT_SGL_NR); // Continue balance on fault
-		WriteReg(0,20,balanceenable,2,FRMWRT_SGL_NR); // balance on for the cell with minimum voltage
+
+ WriteReg(0,19,8,1,FRMWRT_SGL_NR); // Continue balance on fault
+ WriteReg(0,20,balanceenable,2,FRMWRT_SGL_NR); // balance on for the cell with minimum voltage
 		
     /* USER CODE END WHILE */
 
