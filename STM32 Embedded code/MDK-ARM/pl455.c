@@ -1,19 +1,10 @@
-/*
- * pl455orginal.c
- *
- *  Created on: Nov 22, 2020
- *      Author: amrathesh
- */
-
 #include "string.h"
 #include "pl455.h"
 #include "stdint.h"
 #include "gpio.h"
 #include "main.h"
 
-// internal function prototype
 uint16_t CRC16(BYTE *pBuf, int nLen);
-
 
 void powerDown(void)
 {
@@ -37,14 +28,6 @@ void WakePL455(void)
 	  HAL_Delay(2000);
 	  
 }
-
-//BOOL GetFaultStat(void)
-//{
-
-//    if (HAL_GPIO_ReadPin(FAULT_N_GPIO_Port,FAULT_N_Pin))
-//        return 1;
-//    return 0;	
-//}
 
 int  WriteReg(BYTE bID, uint16_t wAddr, uint64_t dwData, BYTE bLen, BYTE bWriteType)
 {
