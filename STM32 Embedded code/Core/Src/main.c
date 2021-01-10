@@ -102,8 +102,8 @@ int main(void)
   BYTE bFrame[132];
 	
   float volt[NOC];
-	float maxCellVoltage = 0; 
-	float minCellVoltage = 0;
+	volatile float maxCellVoltage = 0; 
+	volatile float minCellVoltage = 0;
   volatile int minCellIdx = 0;
 	volatile int maxCellIdx = 0;
   volatile uint16_t balance_en = 0x0000;
@@ -170,11 +170,11 @@ int main(void)
 		
 		
 	  if(maxCellVoltage - minCellVoltage > 0.01)
-			balance_en =  MASK & ~(1<<minCellIdx);
+			balance_en =  MASK & ~(1<<(minCellIdx-1));
 	  else
 			balance_en = 0x0000;
 			
-
+    //balance_en=0xFFFF;
     WriteReg(0,19,8,1,FRMWRT_SGL_NR); // Continue balance on fault
     WriteReg(0,20,balance_en,2,FRMWRT_SGL_NR); // balance on for the cell with minimum voltage
 		

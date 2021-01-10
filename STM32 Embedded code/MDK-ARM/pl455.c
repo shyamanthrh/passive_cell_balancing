@@ -179,7 +179,7 @@ void getcellVoltages(uint8_t *data,uint8_t NOC,float *volt)
 int findminimum(float data[],uint8_t NOC)
 {
 	float min = data[0];
-	int index = 1;
+	int index = 0;
 	for(int i=0;i<NOC;i++){ 
 		
 		if(data[i]<min){
@@ -193,7 +193,7 @@ int findminimum(float data[],uint8_t NOC)
 int findmaximum(float *data,uint8_t NOC)
 {
 	float max = data[0];
-	int index = 1;
+	int index = 0;
 	for(int i=0;i<NOC;i++){ 
 		
 		if(data[i]>max){

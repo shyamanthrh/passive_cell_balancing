@@ -694,9 +694,9 @@ Image Symbol Table
     i.findminimum                            0x08001ee4   Section        0  pl455.o(i.findminimum)
     i.getcellVoltages                        0x08001f18   Section        0  pl455.o(i.getcellVoltages)
     i.main                                   0x08001f60   Section        0  main.o(i.main)
-    i.powerDown                              0x0800214c   Section        0  pl455.o(i.powerDown)
-    .constdata                               0x0800216c   Section      512  pl455.o(.constdata)
-    .constdata                               0x0800236c   Section       24  system_stm32f1xx.o(.constdata)
+    i.powerDown                              0x08002154   Section        0  pl455.o(i.powerDown)
+    .constdata                               0x08002174   Section      512  pl455.o(.constdata)
+    .constdata                               0x08002374   Section       24  system_stm32f1xx.o(.constdata)
     .data                                    0x20000000   Section        9  stm32f1xx_hal.o(.data)
     .data                                    0x2000000c   Section        4  system_stm32f1xx.o(.data)
     .bss                                     0x20000010   Section       64  usart.o(.bss)
@@ -853,13 +853,13 @@ Image Symbol Table
     findmaximum                              0x08001eb3   Thumb Code    50  pl455.o(i.findmaximum)
     findminimum                              0x08001ee5   Thumb Code    50  pl455.o(i.findminimum)
     getcellVoltages                          0x08001f19   Thumb Code    64  pl455.o(i.getcellVoltages)
-    main                                     0x08001f61   Thumb Code   484  main.o(i.main)
-    powerDown                                0x0800214d   Thumb Code    32  pl455.o(i.powerDown)
-    crc16_table                              0x0800216c   Data         512  pl455.o(.constdata)
-    AHBPrescTable                            0x0800236c   Data          16  system_stm32f1xx.o(.constdata)
-    APBPrescTable                            0x0800237c   Data           8  system_stm32f1xx.o(.constdata)
-    Region$$Table$$Base                      0x08002384   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080023a4   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08001f61   Thumb Code   490  main.o(i.main)
+    powerDown                                0x08002155   Thumb Code    32  pl455.o(i.powerDown)
+    crc16_table                              0x08002174   Data         512  pl455.o(.constdata)
+    AHBPrescTable                            0x08002374   Data          16  system_stm32f1xx.o(.constdata)
+    APBPrescTable                            0x08002384   Data           8  system_stm32f1xx.o(.constdata)
+    Region$$Table$$Base                      0x0800238c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080023ac   Number         0  anon$$obj.o(Region$$Table)
     uwTick                                   0x20000000   Data           4  stm32f1xx_hal.o(.data)
     uwTickPrio                               0x20000004   Data           4  stm32f1xx_hal.o(.data)
     uwTickFreq                               0x20000008   Data           1  stm32f1xx_hal.o(.data)
@@ -875,9 +875,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000023b4, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000023bc, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000023a4, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000023ac, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -977,20 +977,20 @@ Memory Map of the image
     0x08001ee4   0x08001ee4   0x00000032   Code   RO           21    i.findminimum       pl455.o
     0x08001f16   0x08001f16   0x00000002   PAD
     0x08001f18   0x08001f18   0x00000048   Code   RO           22    i.getcellVoltages   pl455.o
-    0x08001f60   0x08001f60   0x000001ec   Code   RO          198    i.main              main.o
-    0x0800214c   0x0800214c   0x00000020   Code   RO           23    i.powerDown         pl455.o
-    0x0800216c   0x0800216c   0x00000200   Data   RO           24    .constdata          pl455.o
-    0x0800236c   0x0800236c   0x00000018   Data   RO         1818    .constdata          system_stm32f1xx.o
-    0x08002384   0x08002384   0x00000020   Data   RO         1898    Region$$Table       anon$$obj.o
+    0x08001f60   0x08001f60   0x000001f4   Code   RO          198    i.main              main.o
+    0x08002154   0x08002154   0x00000020   Code   RO           23    i.powerDown         pl455.o
+    0x08002174   0x08002174   0x00000200   Data   RO           24    .constdata          pl455.o
+    0x08002374   0x08002374   0x00000018   Data   RO         1818    .constdata          system_stm32f1xx.o
+    0x0800238c   0x0800238c   0x00000020   Data   RO         1898    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080023a4, Size: 0x00000450, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080023ac, Size: 0x00000450, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080023a4   0x00000009   Data   RW          835    .data               stm32f1xx_hal.o
-    0x20000009   0x080023ad   0x00000003   PAD
-    0x2000000c   0x080023b0   0x00000004   Data   RW         1819    .data               system_stm32f1xx.o
+    0x20000000   0x080023ac   0x00000009   Data   RW          835    .data               stm32f1xx_hal.o
+    0x20000009   0x080023b5   0x00000003   PAD
+    0x2000000c   0x080023b8   0x00000004   Data   RW         1819    .data               system_stm32f1xx.o
     0x20000010        -       0x00000040   Zero   RW          262    .bss                usart.o
     0x20000050        -       0x00000400   Zero   RW            1    STACK               startup_stm32f103xb.o
 
@@ -1002,23 +1002,23 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       188         14          0          0          0        931   gpio.o
-       574          8          0          0          0       2168   main.o
-      1316         36        512          0          0     399493   pl455.o
-        36          8        236          0       1024        804   startup_stm32f103xb.o
-       192         36          0          9          0       5905   stm32f1xx_hal.o
-       304         22          0          0          0      29431   stm32f1xx_hal_cortex.o
-       176          4          0          0          0       1091   stm32f1xx_hal_dma.o
-       812         34          0          0          0       2680   stm32f1xx_hal_gpio.o
-        84          8          0          0          0        898   stm32f1xx_hal_msp.o
-      1784        110          0          0          0       6020   stm32f1xx_hal_rcc.o
-      1482         10          0          0          0      10129   stm32f1xx_hal_uart.o
-        48          6          0          0          0       4410   stm32f1xx_it.o
-         2          0         24          4          0       1127   system_stm32f1xx.o
-       208         26          0          0         64       1670   usart.o
+       188         14          0          0          0        995   gpio.o
+       582         10          0          0          0       2304   main.o
+      1316         36        512          0          0     400165   pl455.o
+        36          8        236          0       1024        836   startup_stm32f103xb.o
+       192         36          0          9          0       6161   stm32f1xx_hal.o
+       304         22          0          0          0      29655   stm32f1xx_hal_cortex.o
+       176          4          0          0          0       1155   stm32f1xx_hal_dma.o
+       812         34          0          0          0       2776   stm32f1xx_hal_gpio.o
+        84          8          0          0          0        962   stm32f1xx_hal_msp.o
+      1784        110          0          0          0       6276   stm32f1xx_hal_rcc.o
+      1482         10          0          0          0      10609   stm32f1xx_hal_uart.o
+        48          6          0          0          0       4730   stm32f1xx_it.o
+         2          0         24          4          0       1223   system_stm32f1xx.o
+       208         26          0          0         64       1798   usart.o
 
     ----------------------------------------------------------------------
-      7216        322        804         16       1088     466757   Object Totals
+      7224        324        804         16       1088     469645   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         10          0          0          3          0          0   (incl. Padding)
 
@@ -1073,15 +1073,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      8320        338        804         16       1088     464597   Grand Totals
-      8320        338        804         16       1088     464597   ELF Image Totals
-      8320        338        804         16          0          0   ROM Totals
+      8328        340        804         16       1088     467485   Grand Totals
+      8328        340        804         16       1088     467485   ELF Image Totals
+      8328        340        804         16          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 9124 (   8.91kB)
+    Total RO  Size (Code + RO Data)                 9132 (   8.92kB)
     Total RW  Size (RW Data + ZI Data)              1104 (   1.08kB)
-    Total ROM Size (Code + RO Data + RW Data)       9140 (   8.93kB)
+    Total ROM Size (Code + RO Data + RW Data)       9148 (   8.93kB)
 
 ==============================================================================
 
