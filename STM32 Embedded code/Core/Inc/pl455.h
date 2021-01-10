@@ -1,10 +1,3 @@
-/*
- * pl455.h
- *
- *  Created on: Nov 22, 2020
- *      Author: amrathesh
- */
-
 #ifndef PL455_H_
 #define PL455_H_
 
@@ -18,9 +11,6 @@ typedef unsigned char BYTE;
 typedef unsigned int BOOL;
 typedef signed int HANDLE;
 
-
-	
-
 // User defines
 #define FRMWRT_SGL_R	0x00 // single device write with response
 #define FRMWRT_SGL_NR	0x10 // single device write without response
@@ -28,10 +18,6 @@ typedef signed int HANDLE;
 #define FRMWRT_GRP_NR	0x30 // group broadcast without response
 #define FRMWRT_ALL_R	0x60 // general broadcast with response
 #define FRMWRT_ALL_NR	0x70 // general broadcast without response
-
-
-
-
 
 // Function Prototypes
 void WakePL455(void);
