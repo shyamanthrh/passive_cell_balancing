@@ -1,0 +1,23 @@
+
+First, let's look at the definition, which has to be entered in \texttt{Glossaries.tex} under \texttt{CoverPages} directory.
+\begin{verbatim}
+%\newacronym{<Ref>}{<Short-Form>}{<Expanded word>}
+\newacronym{ic}{IC}{Integrated Circuits}
+\end{verbatim}
+In order to use the defined acronym, use the commands \verb|\gls{<Ref>}| as shown below
+
+As an example, call the definition with \verb|\gls{ic}| and the outcome of it is reflected as, \gls{ic}.
+
+Note: For the First time, the expanded form appears along with the Short-form definition inside parenthesis. But when the \verb|\gls{}| is repeated, only Short-form appears inside the parenthesis.
+
+Now, let's look at the definition of symbols. Follow the syntax to define the symbol first, inside \texttt{Glossaries.tex} under \texttt{CoverPages} directory.
+\begin{verbatim}
+%\newglossaryentry{<Ref>}{name=<Symbol>, description={<description about the symbol>}, type=<List type>}
+\newglossaryentry{rc}{name=$\tau$, description={Time constant}, type=symbolList}
+\end{verbatim}
+
+As an example, the rate of change is defined with \verb|\gls{rc}| and the outcome of it is reflected as, the rate of change is defined with \gls{rc}.
+
+\vspace{0.75cm}
+
+After elaborating the various sections of the chapter, a summary paragraph should be written discussing the highlights of that particular chapter. This summary paragraph should not be numbered separately.  

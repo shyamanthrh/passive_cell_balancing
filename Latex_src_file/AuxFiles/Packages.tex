@@ -1,0 +1,54 @@
+%Packages
+\usepackage{ecproject}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{float}
+\usepackage{qrcode}
+%%%Page related
+\usepackage{fancyhdr} % for header & footer
+\usepackage[hidelinks]{hyperref}
+\usepackage[toc, nonumberlist]{glossaries} %For Glossaries - to be loaded only after hyperref package
+%\ifIndentPara
+\usepackage{indentfirst}
+%\fi
+\usepackage{setspace}
+%%%Table Related
+%\usepackage{booktabs}
+%\usepackage{makecell}
+%\usepackage{multirow}
+%\usepackage{multicol}
+
+%forcodesnippet
+\usepackage{listings} 
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.58,0.19,0.23}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.99,0.99,0.98}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}

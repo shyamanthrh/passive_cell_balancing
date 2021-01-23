@@ -1,0 +1,148 @@
+\documentclass[12pt,oneside,a4paper]{book} % This style for A4 format.
+
+\input{./AuxFiles/Packages}
+
+%Document settings
+\title{Cell Balancing for Serially Connected Lithium-ion Batteries}
+%%%%%%%%%%%%%%%Minor (or) Major report%%%%%%%%%%%%%%%
+%Uncomment \MinorProject line, if the report is for Minor project.
+\MinorProject
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%Student Details%%% 
+\stuNameA{Shyamanth R H}
+\stuUSNA{1RV17EC151}
+\stuNameB{Amrathesh}
+\stuUSNB{1RV17EC192}
+%\stuNameC{Subrahmanya K N}
+%\stuUSNC{1RV16EC007}
+
+%%%Internal Guide%%%%
+\guideNameA{Dr.Govinda Raju M}
+\guideDesignationA{Assistant Professor}
+\guideDeptA{Dept. of ECE}
+\guideOrgA{RV College of Engineering}
+
+%%%External Guide%%%%
+%\guideNameB{Dr. Ramavenkateshwaran}
+%\guideDesignationB{Assistant Professor}
+%\guideDeptB{Dept. of ECE}
+%\guideOrgB{RV College of Engineering}
+
+%\guideNameC{Dr. Ramavenkateshwaran}
+%\guideDesignationC{Assistant Professor}
+%\guideDeptC{Dept. of ECE}
+%\guideOrgC{RV College of Engineering}
+
+\panelMemberA{Dr.Govinda Raju M}
+\panelMemberDesigA{Assistant Professor}
+\panelMemberB{Dr. N.Ramavenkateswaran}
+\panelMemberDesigB{Assistant Professor}
+
+\Department[ECE]{Electronics and Communication Engineering}
+
+\HOD{Dr. K S Geetha}
+\Principal{Dr. K. N. Subramanya}
+
+\academicYear{2020-2021}
+
+\QRurl{https://drive.google.com/drive/folders/1v1EJTBxn48N5PbZWtiTg7RZP64Gu3E_R?usp=sharing}
+%\QRurl{https://drive.google.com/open?id=1jm-POmuq-ZZ1tT5m-xAdCDRnwvLZH8q-}
+%%%%%%%%%%%%%%%%%%%For PG program%%%%%%%%%%%%%%%%%%%
+%%%Uncomment \pgProgram command and define appropriate values for \MastersIn{} and \pgProgramName{}
+
+%\pgProgram%
+\MastersIn[M.Tech]{Master of Technology}
+\pgProgramName{VLSI Design \& Embedded Systems}
+
+%%%%%%%%%%%%%%%%%%Draft report%%%%%%%%%%%%%%%%%%
+\DraftCopy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%Acronyms%%%%%%%%%%%%%%%%%%
+\newglossary[sym]{symbolList}{sym1}{sym2}{List of Symbols}
+\makeglossaries
+%Acronyms
+\loadglsentries{./AuxFiles/Glossaries}
+\renewcommand{\glspostdescription}{}% To remove dot at the end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%Bibliography%%%%%%%%%%%%%%%%%%%%%
+\usepackage[backend=biber,style=ieee]{biblatex}
+%If backend is set to bibtex, then configure texmaker Bi(La)Tex with "bibtex %"
+\addbibresource{./AuxFiles/ProjectBib.bib}%Add bib file with extention
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%WaterMark%%%%%%%%%%%%%%%%%%%%%
+%%Use it only after Biblatex
+\usepackage[printwatermark]{xwatermark}
+\newwatermark[allpages,color=gray!50,angle=0,scale=2,xpos=0,ypos=0]{\includegraphics[width=0.3\textwidth]{Figures/RV_logoVecW}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+%\pagestyle{empty}
+\newpage
+\begin{spacing}{1.5}
+\input{./CoverPages/Certificate}
+\newpage
+\input{./CoverPages/Declaration}
+\newpage
+\input{./CoverPages/Ack}
+\newpage
+\pagenumbering{roman}
+\chapter*{Abstract}
+\input{./CoverPages/Abstract}
+\end{spacing}
+\newpage
+\pagestyle{fplain}
+\begin{spacing}{1.5}
+	\tableofcontents	
+\end{spacing}
+\newpage
+\begin{spacing}{1.5}
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{\listfigurename}
+	\listoffigures	
+\end{spacing}
+\newpage
+\begin{spacing}{1.5}
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{\listtablename}
+	\listoftables	
+\end{spacing}
+\newpage
+\printglossary[type=\acronymtype, title= Abbreviations, toctitle=Abbreviations]
+%\newpage
+\printglossary[type=symbolList, title= List of Symbols, toctitle=List of Symbols]
+
+\mainmatter
+\pagestyle{mplain}
+\glsresetall
+\begin{spacing}{1.5}
+%Chapter 1 
+\input{./Chapter1/chapter1-Intro}
+
+%Chapter 2
+\input{./Chapter2/chapter2-Funda}
+
+%Chapter 3
+\input{./Chapter3/chapter3-design}
+
+%Chapter 4
+\input{./Chapter4/chapter4-implement}
+
+%Chapter 5
+\input{./Chapter5/chapter5-result}
+
+%Chapter 6
+\input{./Chapter6/chapter6-conclution}
+
+\backmatter
+\clearpage
+%\ifDrft{
+%%Do Nothing
+%}\else{
+\printbibliography%
+%}
+%\printindex
+\end{spacing}
+\end{document}

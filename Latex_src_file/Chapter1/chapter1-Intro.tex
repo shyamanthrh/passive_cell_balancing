@@ -1,0 +1,74 @@
+\chapter{Introduction to Cell Balancing}
+
+\section[Introduction]{\textbf{Introduction}}
+Nowadays, batteries are being used everywhere and Lithium-ion batteries are being used widely because of their low weight, high energy density, long life, high capacity, fast charge capability, low self‐discharge, and eco‐friendliness\cite{li-ion-overview}. Even though cells exhibit equivalent chemistry and have the same size, shape, and weight they differ in their total capacities, self-discharge rates, and internal resistance so when they are connected serially or parallelly in a battery pack will cause charge imbalances over time. If these imbalances are not monitored and overcome may prove catastrophic and can cause degradation of battery and loss in battery's efficiency. There are various cell balancing algorithms developed for lithium ion battery packs\cite{Changhao} classified as passive and active cell balancing methods based on cell voltage and SOC measurements\cite{6043010}.
+
+The passive balancing techniques provide a parallel resistive dissipation path for dissipating higher voltage or higher SOC cell so that the battery pack get equalized. This technique uses fewer components hence reducing the overall cost of the system. So there is a trade-off between cost and efficiency of the system.
+
+The active cell balancing techniques expel charge from higher SOC cells and transfer it to the lower SOC cell, This will conserve the energy within the battery module that will increase the effectiveness of the system and takes less time to balance among the cells compared with the passive cell equalization technique. But, this system has complicated electronic equipment that will increase the system price. Hence, active cell equalization is appropriate for top power applications.
+
+%TODO PARA if needed
+
+\section[Motivation]{\textbf{Motivation}}
+
+As the world is shifting towards electric mobility and batteries are an integral part of an electric vehicle. Most of the electric vehicles today use Lithium-ion battery packs. Lithium-ion batteries are costly and their proper maintenance is required to prolong their life and efficiency. Charging and discharging of the battery pack will cause state of charge(SOC) imbalances over time and it will prevent the battery from charging to its rated capacity. This has created a need for a system capable of performing cell balancing operation.
+
+\section[Problem statement]{\textbf{Problem statement}}
+
+The key safety challenge in lithium-ion batteries is to prevent overcharging and overheating of the cells. Thermal runaway of lithium-ion batteries can be catastrophic and lead to fire hazards and safety must be ensured in applications like electric vehicles by proper cell balancing of the battery pack.
+
+\section[Objectives]{\textbf{Objectives}}
+The objectives of the project are
+\begin{itemize}
+\item To design a Matlab-Simulink model to simulate cell balancing and validate the balancing algorithm.
+\item To design a circuit for cell balancing for serially connected Lithium-ion cells and develop a custom printed circuit board.
+\item To develop embedded code for host controller that controls battery monitoring \acrshort{ic}.
+\end{itemize}
+
+\section[Literature Review]{\textbf{Literature Review}}
+
+
+A thorough literature survey is carried out and several papers from technical journals are referred.
+
+In \cite{ls1}, the authors conducted a study on comparison of different balancing strategies. Those are SOC-based passive discharge balance (\acrshort{pdb}), SOC-based active discharge balance (\acrshort{adb}), SOC-based charge balance (CB), and SOC-based charge-discharge balance (\acrshort{cdb}). Performing balancing at different battery operating conditions would lead to various balancing effect. Active balancing does not effect much on battery pack capacity while passive balancing decreases the battery pack capacity by dissipating heat.   
+
+In \cite{ls2}, the performance of the battery pack is limited by the lowest performing cell in the pack and understanding a cell is very important. Cell can be modelled using equivalent circuit combination of capacitance and resistance and its associated equations. Active balancing can be done in several ways and all of them have their own advantages and disadvantages. Passive cell  balancing can be done using either fixed shunt resistor or switching shunt resistor. The authors also discusses different types of cell imbalances and their causes with solutions for all the cases. Difference in electrochemical characteristics will cause SOC imbalance. Impedance differences are caused by differences in coulumbic efficiency caused by energy consumed by \acrshort{bms} and cell balancing circuits. 
+
+In \cite{ls3}, a different type of balancing circuit is used here. Normally a shunt resistor is used to dissipate the excess energy in case of passive balancing while in this paper the author describes how \acrshort{mosfet} 's internal resistance and be used to dissipate excess energy where the battery capacity is less.This design can reduce the size of the balancing circuit. A 1P15S battery pack was demonstrated in the paper and a \acrshort{bms} was built for the battery pack.
+
+In \cite{ls4}, LTC602 a battery monitoring \acrshort{ic}  from Analog devices is used to implement active cell balancing. It is integrated with a microcontroller which acts as a master or host. An algorithm for passive cell balancing is developed considering different battery operating states. The three states considered in this paper are Idle state, Charging state and discharging state. This \acrshort{bms} is implemented where the battery pack is modularized into master and slave modules.A passive balancing circuit has a bidirectional \acrshort{dc}-\acrshort{dc} converter to discharge one cell and charge another.   
+
+In \cite{ls5}, many battery monitoring \acrshort{ic}'s are connected using daisy chain SPI interface. With this setup multiple battery monitoring \acrshort{ic}'s can be cascaded to realize battery packs upto 400 V. The daisy chain topology reduces number of connections made in case of master slave architecture. Hence only the first battery monitoring \acrshort{ic} is connected to the the master and master communicates with the second device through first device.  
+
+In \cite{ls6}, a comparative analysis is made for passive balancing method by considering  \acrfull{pso} and \acrfull{ga} to acquire the optimal timing of enabling/disabling the balancing current to minimize imbalance of cells of the \acrshort{ev} battery. A Matlab-Simulink model is made for the 1P5S battery pack and realize the algorithm. The balancing parameters can be optimised using \acrshort{pso} and \acrshort{ga}. Using optimised balancing algorithm \acrshort{soc} imbalance can be minimised to a greater extent.     
+
+In \cite{ls7}, simulation for large scale battery for Heavy electric vehicle ( \acrshort{hev}) is made using Matlab-Simulink. The simulation is done on a battery pack consisting of 176 cells with different \acrshort{soc} levels. Here a bidirectional DC-DC converter based active balancing circuit is used to realize cell balancing. To realize a active balancing circuit  different components like i.e Inductor, capacitor, transformer or a power converter can be used. Although passive balancing is low cost solution for cell balancing, nowadays active balancing is preferred in case of \acrshort{ev} s because it extends the life of the battery and time taken to balance the SOC values of cells in case of active balancing is very less compared to passive balancing. Besides the wastage of energy due to balancing can be avoided in case of active balancing. 
+
+In \cite{ls8}, a charge equalization algorithm is presented and implemented using LTC6804 battery monitoring \acrshort{ic}. The algorithm developed can be easily scaled to large number of cells. The algorithm must also detect overcharging and undercharging in order to protect the battery pack from degradation over time.  
+
+\section[Brief Methodology of the project]{\textbf{Brief Methodology of the project}}
+The project tries to meet the objective by following the below methodology
+\begin{itemize}
+\item Understand various cell balancing techniques and learn about their advantages and shortcomings.
+\item Investigate for a low-cost method for implementation.
+\item Design a Matlab-Simulink model to develop an efficient balancing algorithm and simulate balancing.
+\item Reproduce the circuit on a printed circuit board with a battery monitoring \acrshort{ic}.
+\item Integrate cell balancing module with the host micro-controller and port the algorithm validated in simulation.
+\item Investigate and test the module with the battery pack connected.
+\end{itemize}
+\section[Assumptions made / Constraints of the project]{\textbf{Assumptions made / Constraints of the project}}
+The passive cell balancing module uses a battery monitoring \acrshort{ic} which can support up to 16 Li-ion cells only, if a battery pack contains more then 16 cells then many of these modules needs to be stacked and daisy-chain communication architecture needs to be implemented.  
+
+\section[Organization of the report]{\textbf{Organization of the report}}
+
+This report has been organized into six chapters as follows:
+\begin{itemize}
+\item \textbf{Chapter 1:} Introduction to the project as a whole which contains the literature survey carried
+out, and also the motivations, objectives and methodology of the project.
+\item \textbf{Chapter 2:} Theory and fundamentals of passive cell balancing which includes the basics of cell balancing, why the method is economical, its advantages, shortcomings, and design considerations. 
+\item \textbf{Chapter 3:} Discussion on selection of cell model, components for designing of Matlab-Simulink model and  use of new add-ons to visualise algorithm working on the run and report on observation made by analysing the graphs generated by the tool.
+\item \textbf{Chapter 4:} Description of BQ76PL455A-Q1 battery monitoring \acrshort{ic} and discussion on hardware design and embedded software development 
+\item \textbf{Chapter 5:} This chapter reports the results obtained during implementation of the project
+illustrated by graphs and figures.
+\item \textbf{Chapter 6:} Conclusions drawn from the project and future scope of the project.
+\end{itemize}
